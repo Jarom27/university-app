@@ -63,13 +63,25 @@
             return $result;
         }
         function getAllTeachers(){
-            $statement = $this->connection->prepare("SELECT m.id_maestro,m.nombre,m.apellidos,m.birthday, m.direccion,c.nombre_curso,u.email FROM maestro m left join cursos c on m.id_maestro = c.id_maestro LEFT JOIN users u on u.id_user = m.id_user;");
+            $statement = $this->connection->prepare("SELECT m.id_maestro,m.nombre,m.apellidos,m.birthday, m.direccion,c.nombre_curso,u.email FROM maestro m left join cursos c on m.id_clase = c.id_curso LEFT JOIN users u on u.id_user = m.id_user;");
             $statement->execute();
             $result = $statement->fetchAll();
             return $result;
         }
         function getAllStudents(){
             $statement = $this->connection->prepare("SELECT a.DNI,a.nombre,a.apellidos,a.birthday, a.direccion,u.email FROM alumnos a  LEFT JOIN users u on u.id_user = a.id_user;");
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        function getAllClases(){
+            $statement = $this->connection->prepare("SELECT c.id_curso, c.nombre_curso, m.nombre,m.apellidos FROM cursos c LEFT JOIN maestro m ON c.id_curso = m.id_clase;");
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        function getAllStudentsByClase(){
+            $statement = $this->connection->prepare("SELECT COUNT(c.id_alumno) as total,c.id_curso from curso_alumno c GROUP BY c.id_curso;");
             $statement->execute();
             $result = $statement->fetchAll();
             return $result;

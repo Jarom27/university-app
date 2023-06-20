@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-06-2023 a las 23:47:53
+-- Tiempo de generación: 21-06-2023 a las 00:06:33
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `alumnos` (
+  `id_alumno` int(11) UNSIGNED NOT NULL,
   `DNI` varchar(60) NOT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   `apellidos` varchar(50) DEFAULT NULL,
@@ -35,6 +36,13 @@ CREATE TABLE `alumnos` (
   `birthday` varchar(255) NOT NULL,
   `id_user` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `alumnos`
+--
+
+INSERT INTO `alumnos` (`id_alumno`, `DNI`, `nombre`, `apellidos`, `direccion`, `birthday`, `id_user`) VALUES
+(1, '5945491241', 'Javiere', 'Santaollana', '2288 Granby Street', '2009-09-23', 3);
 
 -- --------------------------------------------------------
 
@@ -44,9 +52,16 @@ CREATE TABLE `alumnos` (
 
 CREATE TABLE `cursos` (
   `id_curso` int(11) UNSIGNED NOT NULL,
-  `nombre` varchar(255) NOT NULL,
+  `nombre_curso` varchar(255) NOT NULL,
   `id_maestro` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cursos`
+--
+
+INSERT INTO `cursos` (`id_curso`, `nombre_curso`, `id_maestro`) VALUES
+(1, 'Ciencias Basicas', 1);
 
 -- --------------------------------------------------------
 
@@ -57,7 +72,7 @@ CREATE TABLE `cursos` (
 CREATE TABLE `curso_alumno` (
   `id_curso_alumno` int(11) NOT NULL,
   `id_curso` int(11) UNSIGNED NOT NULL,
-  `DNI` varchar(60) NOT NULL
+  `id_alumno` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -74,6 +89,13 @@ CREATE TABLE `maestro` (
   `direccion` varchar(255) DEFAULT NULL,
   `id_user` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `maestro`
+--
+
+INSERT INTO `maestro` (`id_maestro`, `nombre`, `apellidos`, `birthday`, `direccion`, `id_user`) VALUES
+(1, 'Xerxes ', 'Trafford', '1995-03-02', '55259 Sycamore Place', 2);
 
 -- --------------------------------------------------------
 
@@ -140,6 +162,7 @@ CREATE TABLE `users` (
   `id_user` int(10) UNSIGNED NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `estado` varchar(15) NOT NULL,
   `id_role` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -147,8 +170,10 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id_user`, `email`, `password`, `id_role`) VALUES
-(1, 'admin@admin', 'admin', 1);
+INSERT INTO `users` (`id_user`, `email`, `password`, `estado`, `id_role`) VALUES
+(1, 'admin@admin', 'admin', 'Activo', 1),
+(2, 'maestro@maestro', 'maestro', 'Activo', 2),
+(3, 'alumno@alumno.com', 'alumno', 'Activo', 3);
 
 --
 -- Índices para tablas volcadas
@@ -158,7 +183,7 @@ INSERT INTO `users` (`id_user`, `email`, `password`, `id_role`) VALUES
 -- Indices de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
-  ADD PRIMARY KEY (`DNI`),
+  ADD PRIMARY KEY (`id_alumno`),
   ADD KEY `id_user` (`id_user`);
 
 --
@@ -172,8 +197,9 @@ ALTER TABLE `cursos`
 -- Indices de la tabla `curso_alumno`
 --
 ALTER TABLE `curso_alumno`
-  ADD KEY `id_curso` (`id_curso`,`DNI`),
-  ADD KEY `DNI` (`DNI`);
+  ADD PRIMARY KEY (`id_curso_alumno`),
+  ADD KEY `id_curso` (`id_curso`),
+  ADD KEY `id_alumno` (`id_alumno`);
 
 --
 -- Indices de la tabla `maestro`
@@ -217,13 +243,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `cursos`
 --
 ALTER TABLE `cursos`
-  MODIFY `id_curso` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_curso` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `maestro`
 --
 ALTER TABLE `maestro`
-  MODIFY `id_maestro` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_maestro` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -247,7 +273,7 @@ ALTER TABLE `role_permiso`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
@@ -269,8 +295,8 @@ ALTER TABLE `cursos`
 -- Filtros para la tabla `curso_alumno`
 --
 ALTER TABLE `curso_alumno`
-  ADD CONSTRAINT `curso_alumno_ibfk_1` FOREIGN KEY (`DNI`) REFERENCES `alumnos` (`DNI`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `curso_alumno_ibfk_2` FOREIGN KEY (`id_curso`) REFERENCES `cursos` (`id_curso`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `curso_alumno_ibfk_2` FOREIGN KEY (`id_curso`) REFERENCES `cursos` (`id_curso`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `curso_alumno_ibfk_3` FOREIGN KEY (`id_alumno`) REFERENCES `alumnos` (`id_alumno`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `maestro`
