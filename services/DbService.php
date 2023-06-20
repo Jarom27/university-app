@@ -28,6 +28,7 @@
             $user->setId($result["id_user"]);
             $user->setEmail($result["email"]);
             $user->setPassword($result["password"]);
+            $user->setState($result["estado"]);
             $user->setRole($result["id_role"]);
 
             return $user;
@@ -44,8 +45,9 @@
             $user->setId($result["id_user"]);
             $user->setEmail($result["email"]);
             $user->setPassword($result["password"]);
+            $user->setState($result["estado"]);
             $user->setRole($result["id_role"]);
-
+            
             $statement = $this->connection->prepare("SELECT name from roles where id_role =:id LIMIT 1");
             $statement->execute([":id" => $user->getRole()]);
             $result = $statement->fetch();

@@ -4,6 +4,7 @@
         private $email;
         private $password;
         private $role;
+        private $state;
 
         public function getId(){
             return $this->id;
@@ -28,6 +29,12 @@
         }
         public function setRole($role){
             $this->role = $role;
+        }
+        public function getState(){
+            return $this->state;
+        }
+        public function setState($state){
+            $this->state = $state;
         }
     }
 ?>
