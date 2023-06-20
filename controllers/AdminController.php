@@ -14,6 +14,8 @@
         $content = "maestros.view.php";
     }
     if($_SERVER["REQUEST_URI"] == "/admin/alumnos"){
+        require_once("../services/AlumnoService.php");
+        $alumno_service = new AlumnoService();
         $content = "alumnos.view.php";
     }
     if($_SERVER["REQUEST_URI"] == "/admin/clases"){

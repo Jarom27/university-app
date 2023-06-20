@@ -68,6 +68,12 @@
             $result = $statement->fetchAll();
             return $result;
         }
+        function getAllStudents(){
+            $statement = $this->connection->prepare("SELECT a.DNI,a.nombre,a.apellidos,a.birthday, a.direccion,u.email FROM alumnos a  LEFT JOIN users u on u.id_user = a.id_user;");
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
     }
 
 ?>

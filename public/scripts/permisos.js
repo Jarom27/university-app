@@ -7,7 +7,7 @@ roles.forEach(role => {
     if(role.textContent == "Maestro"){
         role.classList.add("text-bg-info");
     }
-    if(role.textContent == "Alumno"){
+    if(role.textContent == "Estudiante"){
         role.classList.add("text-bg-secondary");
     }
 });
