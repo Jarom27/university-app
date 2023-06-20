@@ -9,6 +9,8 @@
         $content = "home.view.php";
     }
     if($_SERVER["REQUEST_URI"] == "/admin/maestros"){
+        require_once("../services/TeacherService.php");
+        $teacher_service = new TeacherService();
         $content = "maestros.view.php";
     }
     if($_SERVER["REQUEST_URI"] == "/admin/alumnos"){

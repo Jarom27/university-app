@@ -62,6 +62,12 @@
 
             return $result;
         }
+        function getAllTeachers(){
+            $statement = $this->connection->prepare("SELECT m.id_maestro,m.nombre,m.apellidos,m.birthday, m.direccion,c.nombre_curso,u.email FROM maestro m left join cursos c on m.id_maestro = c.id_maestro LEFT JOIN users u on u.id_user = m.id_user;");
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
     }
 
 ?>
