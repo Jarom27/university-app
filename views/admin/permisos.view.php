@@ -23,8 +23,19 @@
                                 </thead>
                                 <tbody>
                                     <?php
+                                        foreach($user_service->userAllList() as $user){
+
+                                            echo "<tr>
+                                                <td>".$user->getId()."</td>
+                                                <td>".$user->getEmail()."</td>
+                                                <td><span class = 'badge role'>".$user->getRole()."</span></td>
+                                                <td><span class = 'badge state'>".$user->getState()."</span></td>
+                                                <td>".$user->getId()."</td>
+                                            </tr>";
+                                        }
                                         
                                     ?>
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -33,5 +44,5 @@
             </div>
         </div>
     </div>
-    
+    <script src="../../public/scripts/permisos.js"></script>
 </div>

@@ -24,7 +24,18 @@
         }
         function userAllList(){
             $result = $this->db_service->getAllUsers();
-            return $result;
+            $arrayUser = array();
+            foreach ($result as $item) {
+                $user = new User();
+                $user->setId($item["id_user"]);
+                $user->setEmail($item["email"]);
+                $user->setPassword($item["password"]);
+                $user->setState($item["estado"]);
+                $user->setRole($this->findRole($item["email"]));
+                array_push($arrayUser,$user);
+                # code...
+            }
+            return $arrayUser;
         }
     }
 
