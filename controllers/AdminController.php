@@ -1,22 +1,26 @@
 <?php
     require_once "../services/UserService.php";
-    require_once("../views/admin/home.view.php");
+    $name = "admin";
+    $role = "Administrador";
+    $user_service = new UserService();
+    $content = "";
+    
     if($_SERVER["REQUEST_URI"] == "/admin/home"){
-        
+        $content = "home.view.php";
     }
     if($_SERVER["REQUEST_URI"] == "/admin/maestros"){
-        require_once("../views/admin/maestros.view.php");
+        $content = "maestros.view.php";
     }
     if($_SERVER["REQUEST_URI"] == "/admin/alumnos"){
-        require_once("../views/admin/alumnos.view.php");
+        $content = "alumnos.view.php";
     }
     if($_SERVER["REQUEST_URI"] == "/admin/clases"){
-        require_once("../views/admin/clases.view.php");
+        $content = "clases.view.php";
     }
     if($_SERVER["REQUEST_URI"] == "/admin/permisos"){
         $user_service = new UserService();
-        require_once("../views/admin/permisos.view.php");
+        $content = "permisos.view.php";
     }
-
+    require_once("../views/admin/layout.php");
 
 ?>
