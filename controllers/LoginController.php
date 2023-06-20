@@ -9,7 +9,8 @@
         try{
             $user_service = new UserService();
             if($user_service->validateUser($_POST["email"],$_POST["password"])){
-                header("Location: /middleware");
+                $_SESSION["email"] = $_POST["email"];
+                header("location: /validate");
             }
         }
         catch(Exception $err){

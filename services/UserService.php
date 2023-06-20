@@ -18,6 +18,14 @@
             }
             return true;
         }
+        function findRole($email){
+            $role = $this->db_service->getRoleByEmail($email);
+            return $role;
+        }
+        function userAllList(){
+            $result = $this->db_service->getAllUsers();
+            return $result;
+        }
     }
 
 ?>

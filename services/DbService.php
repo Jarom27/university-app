@@ -32,6 +32,34 @@
 
             return $user;
         }
+        function getRoleByEmail($email){
+            $statement = $this->connection->prepare("SELECT * from users WHERE email = :email LIMIT 1");
+            $statement->execute([":email" => $email]);
+            $result = $statement->fetch();
+            if($result == false){
+                return null;
+            }
+
+            $user = new User();
+            $user->setId($result["id_user"]);
+            $user->setEmail($result["email"]);
+            $user->setPassword($result["password"]);
+            $user->setRole($result["id_role"]);
+
+            $statement = $this->connection->prepare("SELECT name from roles where id_role =:id LIMIT 1");
+            $statement->execute([":id" => $user->getRole()]);
+            $result = $statement->fetch();
+            $user->setRole($result["name"]);
+
+            return $user->getRole();
+        }
+        function getAllUsers(){
+            $statement = $this->connection->prepare("SELECT * from users");
+            $statement->execute();
+            $result = $statement->fetchAll();
+
+            return $result;
+        }
     }
 
 ?>

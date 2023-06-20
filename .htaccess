@@ -5,4 +5,5 @@ RewriteCond %{SCRIPT_FILENAME} !-f
 
 RewriteRule ^/$ index.php
 RewriteRule ^login$ controllers/LoginController.php
-RewriteRule ^middleware$ middleware/UserMiddleware.php
+RewriteRule ^validate$ middleware/UserMiddleware.php
+RewriteRule ^admin/(\w+)$ controllers/AdminController.php
