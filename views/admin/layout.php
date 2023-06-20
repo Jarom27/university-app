@@ -32,9 +32,18 @@
         </aside>
         <div class="right-side">
             <nav class="navbar-expanded-lg main-header bg-white">
-                <ul class="navbar">
+                <ul class="nav d-flex justify-content-between">
                     <li><a href="/admin/home">Home</a></li>
-                    <li></li>
+                    <li><div class="dropdown bg-white">
+                            <a class="btn btn-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown link
+                            </a>
+
+                            <ul class="dropdown-menu bg-white">
+                                <li><form action="/admin/logout" method="post"><button type="submit" class="dropdown-item" name="logout">Logout</button></form></li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
             </nav>
             <div class="content">
