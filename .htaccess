@@ -9,3 +9,7 @@ RewriteRule ^validate$ middleware/UserMiddleware.php
 RewriteRule ^admin/(\w+)$ controllers/AdminController.php
 RewriteRule ^admin/maestro/(\w+) controllers/AdminController.php
 RewriteRule ^admin/alumno/(\w+) controllers/AdminController.php
+RewriteRule ^admin/clase/(\w+) controllers/AdminController.php
+
+RewriteRule ^maestro/(\w+) controllers/MaestroController.php
+RewriteRule ^alumno/(\w+) controllers/AlumnoController.php

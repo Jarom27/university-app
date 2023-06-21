@@ -13,7 +13,7 @@
         header("location: /admin/home");
     }
     else if($user_service->findRole($_SESSION["email"]) == "Maestro"){
-        echo "soy un maestro";
+        header("location: /maestro/home");
     }
     
 ?>

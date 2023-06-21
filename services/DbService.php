@@ -84,7 +84,7 @@
             return $result;
         }
         function getAllStudentsByClase(){
-            $statement = $this->connection->prepare("SELECT COUNT(c.id_alumno) as total,c.id_curso from curso_alumno c GROUP BY c.id_curso;");
+            $statement = $this->connection->prepare("SELECT Count(c.id_alumno) as total,c.id_curso from curso_alumno c GROUP BY c.id_curso;");
             $statement->execute();
             $result = $statement->fetchAll();
             return $result;
@@ -111,6 +111,12 @@
                 ":estado" => $user->getState(),
                 ":id_role" => $role["id_role"]
             ]);
+        }
+        function addClase(Clase $clase){
+            $statement = $this->connection->prepare("INSERT INTO cursos(nombre_curso) VALUES(:nombre)");
+            $statement->execute([
+                ":nombre" => $clase->getNombre()
+            ]); 
         }
         function addAlumno(Alumno $alumno){
             $this->addUser($alumno);

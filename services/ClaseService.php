@@ -23,6 +23,9 @@
             }
             return $arrayClases;
         }
+        public function addClase(Clase $clase){
+            $this->db_service->addClase($clase);
+        }
     }
     
 

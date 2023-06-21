@@ -31,10 +31,7 @@
             $user_service = new UserService();
             $content = "permisos.view.php";
         }
-        if($_SERVER["REQUEST_URI"] == "/admin/logout"){
-            session_destroy();
-            header("location: /login");
-        }
+        
     }
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if($_SERVER["REQUEST_URI"] == "/admin/maestro/add"){
@@ -101,6 +98,19 @@
             $alumno_service = new AlumnoService();
             $alumno_service->editAlumno($alumno);
             header("location: /admin/alumnos");
+        }
+        if($_SERVER["REQUEST_URI"] == "/admin/clase/add"){
+            require_once("../models/Clase.php");
+            require_once("../services/ClaseService.php");
+            $clase = new Clase();
+            $clase->setNombre($_POST["clase_nombre"]);
+            $clase_service = new ClaseService();
+            $clase_service->addClase($clase);
+            header("location: /admin/clases");
+        }
+        if($_SERVER["REQUEST_URI"] == "/admin/logout"){
+            session_destroy();
+            header("location: /login");
         }
         
     }
