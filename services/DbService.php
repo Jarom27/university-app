@@ -172,6 +172,12 @@
                 ":email" => $email
             ]);
         }
+        function deleteAlumno($email){
+            $statement = $this->connection->prepare("delete users from users JOIN alumnos on users.id_user = alumnos.id_user where users.email = :email");
+            $statement->execute([
+                ":email" => $email
+            ]);
+        }
     }
 
 ?>

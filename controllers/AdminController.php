@@ -70,6 +70,12 @@
             $teacher_service->deleteTeacher($_POST["delete_email"]);
             header("location: /admin/maestros");
         }
+        if($_SERVER["REQUEST_URI"] == "/admin/alumno/delete"){
+            require_once("../services/AlumnoService.php");
+            $teacher_service = new AlumnoService();
+            $teacher_service->deleteAlumno($_POST["delete_email"]);
+            header("location: /admin/alumnos");
+        }
         if($_SERVER["REQUEST_URI"] == "/admin/alumno/add"){
             require_once("../models/Alumno.php");
             require_once("../services/AlumnoService.php");

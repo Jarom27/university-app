@@ -34,6 +34,9 @@
         function editAlumno(Alumno $alumno){
             $this->db_service->updateAlumno($alumno);
         }
+        function deleteAlumno($email){
+            $this->db_service->deleteAlumno($email);
+        }
     }
     
 ?>
