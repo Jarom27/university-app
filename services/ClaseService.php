@@ -12,14 +12,23 @@
             $result = $this->db_service->getAllClases();
             $conteo = $this->db_service->getAllStudentsByClase();
             $arrayClases = array();
+            $count = 0;
             foreach ($result as $value) {
                 # code...
                 $curso = new Clase();
                 $curso->setId($value["id_curso"]);
                 $curso->setNombre($value["nombre_curso"]);
-                $curso->setMaestro($value["nombre"]);
-                $curso->setAlumnosInscritos($conteo["total"]);
+                $curso->setMaestro($value["nombre"]." ".$value["apellidos"]);
+                if($count < count($conteo)){
+                    $curso->setAlumnosInscritos($conteo[$count]["total"]);
+                }
+                else{
+                    $curso->setAlumnosInscritos(0);
+                }
+                
+                
                 array_push($arrayClases,$curso);
+                $count++;
             }
             return $arrayClases;
         }
