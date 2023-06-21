@@ -56,16 +56,21 @@
             require_once("../models/Maestro.php");
             require_once("../services/TeacherService.php");
             $teacher = new Maestro();
-            $teacher->setEmail($_POST["edit_email"]);
-            $teacher->setNombre($_POST["edit_nombre"]);
-            $teacher->setApellidos($_POST["edit_apellido"]);
-            $teacher->setClase($_POST["edit_clase"]);
-            $teacher->setBirthdate($_POST["edit_fecha"]);
-            $teacher->setAddress($_POST["edit_direccion"]);
+            $teacher->setEmail($_POST["editar_email"]);
+            $teacher->setNombre($_POST["editar_nombre"]);
+            $teacher->setApellidos($_POST["editar_apellido"]);
+            $teacher->setClase($_POST["editar_clase"]);
+            $teacher->setBirthdate($_POST["editar_fecha"]);
+            $teacher->setAddress($_POST["editar_direccion"]);
 
             $teacher_service = new TeacherService();
             $teacher_service->editTeacher($teacher);
             header("location: /admin/maestros");
+        }
+        if($_SERVER["REQUEST_URI"] == "/admin/maestro/delete"){
+            require_once("../services/TeacherService.php");
+            $teacher_service = new TeacherService();
+            $teacher_service->deleteTeacher($_POST["delete_email"]);
         }
         
     }

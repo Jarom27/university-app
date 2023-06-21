@@ -38,6 +38,9 @@
         function editTeacher(Maestro $maestro) {
             $this->db_service->updateTeacher($maestro);
         }
+        function deleteTeacher($email){
+            $this->db_service->deleteTeacher($email);
+        }
     }
     
 

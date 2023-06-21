@@ -136,10 +136,10 @@
                 ":email" => $maestro->getEmail()
             ]);
         }
-        function deleteTeacher(Maestro $maestro){
-            $statement = $this->connection->prepare("DELETE maestro as m RIGHT JOIN users as u on m.id_user = u.id_user where u.email = :email");
+        function deleteTeacher($email){
+            $statement = $this->connection->prepare("delete users from users JOIN maestro on users.id_user = maestro.id_user where users.email = :email");
             $statement->execute([
-                ":email" => $maestro->getEmail()
+                ":email" => $email
             ]);
         }
     }
