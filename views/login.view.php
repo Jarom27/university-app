@@ -21,9 +21,9 @@
             </div> 
             <div class="mx-auto card w-50 d-flex flex-column align-items-center">
                 <p>Bienvenido, Ingresa con tu cuenta</p>
-                <form action="/login" method="POST">
-                    <input type="email" class="form-control" placeholder="email">
-                    <input type="password" class="form-control" placeholder="password">
+                <form action="/login" method="post">
+                    <input type="email" name="email" class="form-control" placeholder="Email">
+                    <input type="password" name="password" class="form-control" placeholder="Password">
                     <input type="submit" class="btn btn-primary" value="Ingresar">
                 </form>
 
