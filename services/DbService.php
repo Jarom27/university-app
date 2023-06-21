@@ -1,5 +1,8 @@
 <?php 
     require_once "../models/User.php";
+    require_once "../models/Maestro.php";
+    require_once "../models/Alumno.php";
+    require_once "../models/Clase.php";
     class DbService{
         private $msn;
         private $host;
@@ -85,6 +88,59 @@
             $statement->execute();
             $result = $statement->fetchAll();
             return $result;
+        }
+        function getIdRole($role){
+            $statement = $this->connection->prepare("SELECT id_role from roles where name= :role LIMIT 1");
+            $statement->execute([":role" => $role]);
+            $result = $statement->fetch();
+            return $result;
+        }
+        function getClaseAsignada($classname){
+            $statement = $this->connection->prepare("SELECT id_curso from cursos where nombre_curso = :nombre LIMIT 1");
+            $statement->execute([":nombre" => $classname]);
+            $result = $statement->fetch();
+            return $result;
+        }
+        //Añadir cosas
+        function addUser(User $user){
+            $role = $this->getIdRole($user->getRole());
+            $statement = $this->connection->prepare("INSERT INTO users(email,password,estado,id_role) VALUES(:email,:password,:estado,:id_role)");
+            $statement->execute([
+                ":email"=> $user->getEmail(),
+                ":password" => $user->getPassword(),
+                ":estado" => $user->getState(),
+                ":id_role" => $role["id_role"]
+            ]);
+        }
+        function addTeacher(Maestro $maestro){
+            $this->addUser($maestro);
+            $result = $this->selectUserByEmail($maestro->getEmail());
+            $id_clase = $this->getClaseAsignada($maestro->getClase());
+            $statement = $this->connection->prepare("INSERT INTO maestro(nombre,apellidos,birthday,direccion,id_user,id_clase) VALUES(:nombre, :apellidos, :birthday,:direccion,:id_user,:id_clase)");
+            $statement->execute([
+                ":nombre" => $maestro->getNombre(),
+                ":apellidos" => $maestro->getApellidos(),
+                ":birthday" => $maestro->getBirthdate(),
+                ":direccion" => $maestro->getAddress(),
+                ":id_user" => $result->getId(),
+                ":id_clase" => $id_clase["id_curso"]
+            ]);   
+        }
+        function updateTeacher(Maestro $maestro){
+            $statement= $this->connection->prepare("update maestro as m right JOIN users as u on m.id_user = u.id_user SET m.nombre = :nombre, m.apellidos = :apellidos, m.birthday = :birthday, m.direccion = :direccion WHERE u.email = :email  ");
+            $statement->execute([
+                ":nombre" => $maestro->getNombre(),
+                ":apellidos" => $maestro->getApellidos(),
+                ":birthday" => $maestro->getBirthdate(),
+                ":direccion" => $maestro->getAddress(),
+                ":email" => $maestro->getEmail()
+            ]);
+        }
+        function deleteTeacher(Maestro $maestro){
+            $statement = $this->connection->prepare("DELETE maestro as m RIGHT JOIN users as u on m.id_user = u.id_user where u.email = :email");
+            $statement->execute([
+                ":email" => $maestro->getEmail()
+            ]);
         }
     }
 

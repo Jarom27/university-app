@@ -46,6 +46,12 @@
     padding: .25rem;
 }
 .nav{
-    padding: 1rem;
     list-style: none;
+}
+.icon{
+    width: 20px;
+    height: 20px;
+}
+.icon img{
+    width: 100%;
 }

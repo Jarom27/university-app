@@ -2,7 +2,7 @@
     require_once("User.php");
     class Maestro extends User
     {
-        private $id;
+        private $idMaestro;
         private $nombre;
         private $apellidos;
         private $email;
@@ -10,11 +10,11 @@
         private $birthdate;
         private $address;
 
-        public function getId(){
-            return $this->id;
+        public function getIdMaestro(){
+            return $this->idMaestro;
         }
-        public function setId($id){
-            $this->id = $id;
+        public function setIdMaestro($id){
+            $this->idMaestro = $id;
         }
         public function getNombre(){
             return $this->nombre;
