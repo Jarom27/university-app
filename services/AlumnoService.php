@@ -1,5 +1,6 @@
 <?php
     require_once("../models/Alumno.php");
+    require_once("../models/User.php");
     class AlumnoService 
     {
         private $db_service;
@@ -23,6 +24,15 @@
                 array_push($array_students,$alumno);
             }
             return $array_students;
+        }
+        function addAlumno(Alumno $alumno){
+            $alumno->setPassword("Funval");
+            $alumno->setRole("Estudiante");
+            $alumno->setState("Activo");
+            $this->db_service->addAlumno($alumno);
+        }
+        function editAlumno(Alumno $alumno){
+            $this->db_service->updateAlumno($alumno);
         }
     }
     

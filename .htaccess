@@ -8,3 +8,4 @@ RewriteRule ^login$ controllers/LoginController.php
 RewriteRule ^validate$ middleware/UserMiddleware.php
 RewriteRule ^admin/(\w+)$ controllers/AdminController.php
 RewriteRule ^admin/maestro/(\w+) controllers/AdminController.php
+RewriteRule ^admin/alumno/(\w+) controllers/AdminController.php

@@ -72,6 +72,36 @@
             $teacher_service = new TeacherService();
             $teacher_service->deleteTeacher($_POST["delete_email"]);
         }
+        if($_SERVER["REQUEST_URI"] == "/admin/alumno/add"){
+            require_once("../models/Alumno.php");
+            require_once("../services/AlumnoService.php");
+            $alumno = new Alumno();
+            $alumno->setDNI($_POST["dni"]);
+            $alumno->setEmail($_POST["alumno_email"]);
+            $alumno->setNombre($_POST["alumno_nombre"]);
+            $alumno->setApellidos($_POST["alumno_apellido"]);
+            $alumno->setBirthday($_POST["alumno_fecha"]);
+            $alumno->setAddress($_POST["alumno_direccion"]);
+
+            $alumno_service = new AlumnoService();
+            $alumno_service->addAlumno($alumno);
+            header("location: /admin/alumnos");
+        }
+        if($_SERVER["REQUEST_URI"] == "/admin/alumno/edit"){
+            require_once("../models/Alumno.php");
+            require_once("../services/AlumnoService.php");
+            $alumno = new Alumno();
+            $alumno->setDNI($_POST["dni"]);
+            $alumno->setEmail($_POST["editar_email"]);
+            $alumno->setNombre($_POST["editar_nombre"]);
+            $alumno->setApellidos($_POST["editar_apellido"]);
+            $alumno->setBirthday($_POST["editar_fecha"]);
+            $alumno->setAddress($_POST["editar_direccion"]);
+
+            $alumno_service = new AlumnoService();
+            $alumno_service->editAlumno($alumno);
+            header("location: /admin/alumnos");
+        }
         
     }
     

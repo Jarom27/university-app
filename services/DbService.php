@@ -112,6 +112,19 @@
                 ":id_role" => $role["id_role"]
             ]);
         }
+        function addAlumno(Alumno $alumno){
+            $this->addUser($alumno);
+            $result = $this->selectUserByEmail($alumno->getEmail());
+            $statement = $this->connection->prepare("INSERT INTO alumnos(DNI,nombre,apellidos,birthday,direccion,id_user) VALUES(:dni,:nombre, :apellidos, :birthday,:direccion,:id_user)");
+            $statement->execute([
+                ":dni" => $alumno->getDNI(),
+                ":nombre" => $alumno->getNombre(),
+                ":apellidos" => $alumno->getApellidos(),
+                ":birthday" => $alumno->getBirthday(),
+                ":direccion" => $alumno->getAddress(),
+                ":id_user" => $result->getId()
+            ]);   
+        }
         function addTeacher(Maestro $maestro){
             $this->addUser($maestro);
             $result = $this->selectUserByEmail($maestro->getEmail());
@@ -125,6 +138,17 @@
                 ":id_user" => $result->getId(),
                 ":id_clase" => $id_clase["id_curso"]
             ]);   
+        }
+        function updateAlumno(Alumno $alumno){
+            $statement= $this->connection->prepare("update alumnos as a right JOIN users as u on a.id_user = u.id_user SET a.DNI = :dni, a.nombre = :nombre, a.apellidos = :apellidos, a.birthday = :birthday, a.direccion = :direccion WHERE u.email = :email  ");
+            $statement->execute([
+                ":dni" => $alumno->getDNI(),
+                ":nombre" => $alumno->getNombre(),
+                ":apellidos" => $alumno->getApellidos(),
+                ":birthday" => $alumno->getBirthday(),
+                ":direccion" => $alumno->getAddress(),
+                ":email" => $alumno->getEmail()
+            ]);
         }
         function updateTeacher(Maestro $maestro){
             $statement= $this->connection->prepare("update maestro as m right JOIN users as u on m.id_user = u.id_user SET m.nombre = :nombre, m.apellidos = :apellidos, m.birthday = :birthday, m.direccion = :direccion WHERE u.email = :email  ");

@@ -36,7 +36,7 @@
                     <li><a href="/admin/home">Home</a></li>
                     <li><div class="dropdown bg-white">
                             <a class="btn btn-white dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown link
+                                <?=$name?>
                             </a>
 
                             <ul class="dropdown-menu bg-white">
