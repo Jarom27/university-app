@@ -29,3 +29,12 @@ modalEditar.forEach(boton => {
     })
 })
 let modalEliminar = document.querySelectorAll(".trash");
+modalEliminar.forEach(boton=>{
+    boton.addEventListener("click",e =>{
+        let email = document.getElementById("eliminar_email");
+        let dato = e.target.parentElement.id;
+        
+        let array = tabla_contenido.children[dato-1];
+        email.value = array.children[2].textContent;
+    });
+});

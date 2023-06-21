@@ -13,3 +13,4 @@ RewriteRule ^admin/clase/(\w+) controllers/AdminController.php
 
 RewriteRule ^maestro/(\w+) controllers/MaestroController.php
 RewriteRule ^alumno/(\w+) controllers/AlumnoController.php
+

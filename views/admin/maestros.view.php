@@ -115,8 +115,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="eliminarMaestro" class="modal-body" action="/admin/maestro/delete" method="post">
-                    <input type="hidden" id="eliminar_email" name="delete_email">
                     <h2>Quieres eliminar al usuario?</h2>
+                    <input type="email" class="form-control-plaintext" id="eliminar_email" name="delete_email">
+                    
                 </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

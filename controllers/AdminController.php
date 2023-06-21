@@ -68,6 +68,7 @@
             require_once("../services/TeacherService.php");
             $teacher_service = new TeacherService();
             $teacher_service->deleteTeacher($_POST["delete_email"]);
+            header("location: /admin/maestros");
         }
         if($_SERVER["REQUEST_URI"] == "/admin/alumno/add"){
             require_once("../models/Alumno.php");

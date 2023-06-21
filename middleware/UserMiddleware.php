@@ -15,5 +15,8 @@
     else if($user_service->findRole($_SESSION["email"]) == "Maestro"){
         header("location: /maestro/home");
     }
+    else if($user_service->findRole($_SESSION["email"]) == "Estudiante"){
+        header("location: /alumno/home");
+    }
     
 ?>
