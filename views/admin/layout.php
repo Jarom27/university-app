@@ -21,11 +21,11 @@
             <hr>
             <div class="tools">
                 <p>Menu de Administración</p>
-                <ul>
-                    <li><a href="/admin/permisos">Permisos</a></li>
-                    <li><a href="/admin/maestros">Maestros</a></li>
-                    <li><a href="/admin/alumnos">Alumnos</a></li>
-                    <li><a href="/admin/clases">Clases</a></li>
+                <ul class="container d-flex flex-column gap-3">
+                    <li><a href="/admin/permisos"><span class="options-icon"><img style="width: 25px;"  src = "../../public/assets/permisos.svg"></span>Permisos</a></li>
+                    <li><a href="/admin/maestros"><span class="options-icon"><img style="width: 25px;"  src = "../../public/assets/teacher.svg"></span>Maestros</a></li>
+                    <li><a href="/admin/alumnos"><span class="options-icon"><img style="width: 25px;"  src = "../../public/assets/student.svg"></span>Alumnos</a></li>
+                    <li><a href="/admin/clases"><span class="options-icon"><img style="width: 25px;"  src = "../../public/assets/clases.svg"></span>Clases</a></li>
 
                 </ul>
             </div>
